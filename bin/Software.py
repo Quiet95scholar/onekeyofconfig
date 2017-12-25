@@ -1,9 +1,11 @@
 import os
+import bin.Drive
 
 
 class Software(object):
 
     def __init__(self, path):
+        self.drive = bin.Drive.Drive()
         self.path = path
         self.THREAD = 1
         self.option = ''
@@ -18,7 +20,7 @@ class Software(object):
     def install(self):
         old_work_space = os.getcwd()
         os.chdir(self.path)
-        os.system('make -j '+str(self.THREAD)+' && make install')
+        os.system('make -j '+str(self.drive.cpu_counts)+' && make install')
         os.chdir(old_work_space)
         return 0
 
