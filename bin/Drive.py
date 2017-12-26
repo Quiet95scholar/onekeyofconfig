@@ -1,6 +1,9 @@
+import json
 import os
 import platform
 import multiprocessing
+
+import requests
 
 
 class Drive(object):
@@ -9,6 +12,7 @@ class Drive(object):
         self.system_name = platform.system()
         self.cpu_counts = multiprocessing.cpu_count()
         self.system_size = platform.machine().find('64') > 0 and 64 or 32
+        self.abbr = self.network
         if self.system_name == 'Linux':
             self.system_branch_name = self.get_linux_branch_name
             self.version = self.get_linux_version
@@ -17,7 +21,7 @@ class Drive(object):
         elif self.system_name == 'Windows':
             self.version = platform.version()
             self.big_version = self.version.split('.')[0]
-            self.system_branch_name = platform.system()+self.big_version
+            self.system_branch_name = platform.system() + self.big_version
 
     @property
     def get_linux_branch_name(self):
@@ -61,7 +65,17 @@ class Drive(object):
     def install_lsb(self):
         if len(os.popen('which yum').read()) > 0:
             order = 'yum'
-            return os.system(order+' install -y redhat-lsb')
+            return os.system(order + ' install -y redhat-lsb')
         elif len(os.popen('which apt-get').read()) > 0:
             order = 'apt-get'
-            return os.system(order+' install -y lsb-release')
+            return os.system(order + ' install -y lsb-release')
+
+    @property
+    def network(self):
+        # noinspection PyBroadException
+        try:
+            url = 'http://ip.taobao.com/service/getIpInfo.php?ip=myip'
+            country_id = json.loads(requests.get(url, timeout=5, allow_redirects=True).text)['data']['country_id']
+        except:
+            country_id = 'world'
+        return country_id
