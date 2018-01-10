@@ -1,9 +1,12 @@
-import json
 import os
+import json
 import platform
 import multiprocessing
 
-import requests
+try:
+    import requests
+except ModuleNotFoundError:
+    os.system('pip install requests')
 
 
 class Drive(object):
@@ -77,5 +80,5 @@ class Drive(object):
             url = 'http://ip.taobao.com/service/getIpInfo.php?ip=myip'
             country_id = json.loads(requests.get(url, timeout=5, allow_redirects=True).text)['data']['country_id']
         except:
-            country_id = 'world'
+            country_id = 'ALL'
         return country_id

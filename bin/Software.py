@@ -7,7 +7,6 @@ class Software(object):
     def __init__(self, path):
         self.drive = bin.Drive.Drive()
         self.path = path
-        self.THREAD = 1
         self.option = ''
         self.dirPath = path
         self.dirName = os.path.split(self.path)[1]
@@ -31,6 +30,10 @@ class Software(object):
     def add_option(self, option):
         self.option += " "+option+' '
         return self
+
+    def unzip(self, file_name):
+        path_name = ""
+        return path_name
 
     def prefix(self, path):
         self.option += " --prefix="+path+' '
