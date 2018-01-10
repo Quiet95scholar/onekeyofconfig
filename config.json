@@ -1,0 +1,180 @@
+{
+    "supported": {
+        "php": {
+            "info": {
+                "can_coexist": 1,
+                "download_url": {
+                    "ALL": "http://php.net/get/php-{version}.tar.gz/from/this/mirror",
+                    "US": "http://php.net/get/php-{version}.tar.gz/from/this/mirror",
+                    "TW": "http://tw2.php.net/get/php-{version}.tar.gz/from/this/mirror",
+                    "ZH": "http://php.net/get/php-{version}.tar.gz/from/this/mirror"
+                },
+                "file_name": "php-{version}.tar.gz"
+            },
+            "children": {
+                "53": {
+                    "version": "5.3.29",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 1,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                },
+                "54": {
+                    "version": "5.4.45",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                },
+                "55": {
+                    "version": "5.5.38",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                },
+                "56": {
+                    "version": "5.6.32",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                },
+                "70": {
+                    "version": "7.0.26",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                },
+                "71": {
+                    "version": "7.1.13",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                },
+                "72": {
+                    "version": "7.2.1",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "FPM-port": 0,
+                    "FPM-file": ""
+                }
+            }
+        },
+        "apache": {
+            "info": {
+                "install_dir_name": "httpd",
+                "download_url": {
+                    "ALL": "http://mirrors.hust.edu.cn/apache//httpd/httpd-{version}.tar.gz"
+                },
+                "file_name": "httpd-{version}.tar.gz"
+            },
+            "children": {
+                "22": {
+                    "version": "2.2.34",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 1,
+                    "install_path": "",
+                    "listen-port": 0
+                },
+                "24": {
+                    "version": "2.4.29",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "listen-port": 0
+                }
+            }
+        },
+        "nginx": {
+            "info": {},
+            "children": {
+                "nginx": {
+                    "version": "1.12.2",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "listen-port": 0,
+                    "info": {
+                        "download_url": {
+                            "ALL": "http://nginx.org/download/nginx-{version}.tar.gz"
+                        },
+                        "file_name": "nginx-{version}.tar.gz"
+                    }
+                },
+                "tengine": {
+                    "version": "2.2.1",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "listen-port": 0,
+                    "info": {
+                        "download_url": {
+                            "ALL": "http://tengine.taobao.org/download/tengine-{version}.tar.gz"
+                        },
+                        "file_name": "tengine-{version}.tar.gz"
+                    }
+                },
+                "openresty": {
+                    "version": "1.13.6.1",
+                    "install": 0,
+                    "will_install": 0,
+                    "default": 0,
+                    "install_path": "",
+                    "listen-port": 0,
+                    "info": {
+                        "download_url": {
+                            "ALL": "https://openresty.org/download/openresty-{version}.tar.gz"
+                        },
+                        "file_name": "openresty-{version}.tar.gz"
+                    }
+                }
+            }
+        },
+        "openssl": {
+            "info": {
+                "download_url": {
+                    "ALL": "https://www.openssl.org/source/openssl-{version}.tar.gz"
+                },
+                "file_name": "openssl-{version}.tar.gz"
+            },
+            "version": "1.0.2n",
+            "install": 0,
+            "will_install": 0,
+            "default": 0,
+            "install_path": ""
+        }
+    },
+    "config": {
+        "download_path": "./download/",
+        "install_path": "/usr/local/",
+        "wwwroot_dir": "/data/wwwroot/",
+        "wwwlogs_dir": "/data/wwwlogs/",
+        "mysql_data_dir": "/data/mysql/",
+        "run_user": "www",
+        "run_group": "www",
+        "work_space": "E:\\work_space\\onekeyofconfig"
+    },
+    "status": "config",
+    "documentation": "status:config/install"
+}
