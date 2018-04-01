@@ -31,13 +31,19 @@ class Tools(object):
         r = requests.get(file_url, stream=True)
         content_size = int(r.headers['content-length'])
         download_size = 0
-        with open(file_name, "wb") as file:
-            for chunk in r.iter_content(chunk_size=1024):
-                if chunk:
-                    download_size += len(chunk)
-                    file.write(chunk)
-                    print('\r正在下载' + file_name + ' ' + str(download_size) + "/" + str(content_size), end='')
+        if not (os.path.isfile(file_name) and content_size == os.path.getsize(file_name)):
+            with open(file_name, "wb") as file:
+                for chunk in r.iter_content(chunk_size=1024):
+                    if chunk:
+                        download_size += len(chunk)
+                        file.write(chunk)
+                        if download_size == content_size:
+                            end = '\n'
+                        else:
+                            end = ''
+                        print('\r正在下载' + file_name + ' ' + str(download_size) + "/" + str(content_size), end=end)
         if os.path.isfile(file_name):
+            print(file_name+' 检查成功')
             return True
         else:
             return False

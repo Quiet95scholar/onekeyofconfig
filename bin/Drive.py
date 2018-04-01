@@ -79,6 +79,6 @@ class Drive(object):
         try:
             url = 'http://ip.taobao.com/service/getIpInfo.php?ip=myip'
             country_id = json.loads(requests.get(url, timeout=5, allow_redirects=True).text)['data']['country_id']
-        except:
+        except BaseException:
             country_id = 'ALL'
         return country_id
