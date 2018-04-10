@@ -1,8 +1,20 @@
 import os
+try:
+    import time
+except ModuleNotFoundError:
+    os.system('pip install time')
+    import time
+try:
+    import re
+except ModuleNotFoundError:
+    os.system('pip install re')
+    import re
+try:
+    import requests
+except ModuleNotFoundError:
+    os.system('pip install requests')
+    import requests
 import bin.Drive
-import time
-import re
-import requests
 
 
 class Tools(object):

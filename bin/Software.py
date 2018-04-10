@@ -1,8 +1,16 @@
 import os
+try:
+    import shutil
+except ModuleNotFoundError:
+    os.system('pip install shutil')
+    import shutil
+try:
+    import copy
+except ModuleNotFoundError:
+    os.system('pip install copy')
+    import copy
 import bin.Drive
-import shutil
 import bin.SoftwareChild
-import copy
 
 
 class Software(object):

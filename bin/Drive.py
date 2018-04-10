@@ -1,8 +1,19 @@
 import os
-import json
-import platform
-import multiprocessing
-
+try:
+    import json
+except ModuleNotFoundError:
+    os.system('pip install json')
+    import json
+try:
+    import platform
+except ModuleNotFoundError:
+    os.system('pip install platform')
+    import platform
+try:
+    import multiprocessing
+except ModuleNotFoundError:
+    os.system('pip install multiprocessing')
+    import multiprocessing
 try:
     import requests
 except ModuleNotFoundError:

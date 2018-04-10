@@ -1,7 +1,15 @@
 import os
-import shutil
+try:
+    import shutil
+except ModuleNotFoundError:
+    os.system('pip install shutil')
+    import shutil
+try:
+    import re
+except ModuleNotFoundError:
+    os.system('pip install re')
+    import re
 import bin.Software
-import re
 
 
 class Php(bin.Software.Software):

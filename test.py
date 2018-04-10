@@ -1,19 +1,40 @@
 import os
-import sys
-import time
-import json
-import platform
-import bin.Drive as Drive
-import config.Config as Config
-import bin.Tools as Tools
-import re
-from collections import defaultdict
-# noinspection PyBroadException
+try:
+    import sys
+except ModuleNotFoundError:
+    os.system('pip install sys')
+    import sys
+try:
+    import time
+except ModuleNotFoundError:
+    os.system('pip install time')
+    import time
+try:
+    import json
+except ModuleNotFoundError:
+    os.system('pip install json')
+    import json
+try:
+    import platform
+except ModuleNotFoundError:
+    os.system('pip install platform')
+    import platform
+try:
+    import re
+except ModuleNotFoundError:
+    os.system('pip install re')
+    import re
 try:
     import requests
 except ModuleNotFoundError:
     os.system('pip install requests')
     import requests
+import bin.Drive as Drive
+import config.Config as Config
+import bin.Tools as Tools
+from collections import defaultdict
+
+# noinspection PyBroadException
 # openssl = bin.Software.Software('aa')
 # openssl.prefix('/usr/local/openssl').add_option('-fPIC shared zlib-dynamic').configure().install()
 

@@ -1,10 +1,10 @@
-import json
 import os
-import bin.Drive
-import bin.Tools
+import json
 import copy
 import platform
 import multiprocessing
+import bin.Drive
+import bin.Tools
 
 import requests
 
