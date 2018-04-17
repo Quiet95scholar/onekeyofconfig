@@ -74,7 +74,6 @@
               "httpd-remoteip"
             ]
           },
-          "default": 1,
           "version": "2.2.34",
           "listen-port": 0,
           "install_path": "/usr/local/apache_22"
@@ -89,7 +88,8 @@
               "openssl"
             ]
           },
-          "version": "2.4.29",
+          "default": 1,
+          "version": "2.4.33",
           "listen-port": 0,
           "install_path": "/usr/local/httpd"
         }

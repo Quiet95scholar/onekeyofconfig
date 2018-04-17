@@ -1,14 +1,6 @@
 import os
-try:
-    import shutil
-except ModuleNotFoundError:
-    os.system('pip install shutil')
-    import shutil
-try:
-    import copy
-except ModuleNotFoundError:
-    os.system('pip install copy')
-    import copy
+import shutil
+import copy
 import bin.Drive
 import bin.SoftwareChild
 
@@ -97,6 +89,7 @@ class Software(object):
         new_child = child.capitalize()
         if "module_class_name" in self.parameter['info']:
             new_module = self.parameter['info']['module_class_name']
+        print(new_module)
         try:
             class_name = getattr(bin.SoftwareChild, (new_module + new_child))
         except AttributeError:

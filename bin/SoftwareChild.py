@@ -1,14 +1,6 @@
 import os
-try:
-    import shutil
-except ModuleNotFoundError:
-    os.system('pip install shutil')
-    import shutil
-try:
-    import re
-except ModuleNotFoundError:
-    os.system('pip install re')
-    import re
+import shutil
+import re
 import bin.Software
 
 

@@ -1,38 +1,9 @@
-import os
-try:
-    import sys
-except ModuleNotFoundError:
-    os.system('pip install sys')
-    import sys
-try:
-    import time
-except ModuleNotFoundError:
-    os.system('pip install time')
-    import time
-try:
-    import json
-except ModuleNotFoundError:
-    os.system('pip install json')
-    import json
-try:
-    import platform
-except ModuleNotFoundError:
-    os.system('pip install platform')
-    import platform
-try:
-    import re
-except ModuleNotFoundError:
-    os.system('pip install re')
-    import re
-try:
-    import requests
-except ModuleNotFoundError:
-    os.system('pip install requests')
-    import requests
-import bin.Drive as Drive
+#!/usr/bin/env python3
+import bin.Init as Init
+import re
 import config.Config as Config
 import bin.Tools as Tools
-from collections import defaultdict
+Init.Init()
 
 # noinspection PyBroadException
 # openssl = bin.Software.Software('aa')
@@ -74,7 +45,11 @@ if config.status == "config":
             if 'default' in module_info:
                 if module_info['default'] == 1:
                     want = 'y'
-        want = tools.input_re('\rWant to install ' + module + ' ? please input y/n ( default "' + want + '" ): ', want,
+        want = tools.input_re('\rWant to install ' +
+                              module +
+                              ' ? please input y/n ( default "' +
+                              want +
+                              '" ): ', want,
                               r'^[\s]*[YN]?[\s]*$', re.IGNORECASE)
         if want == 'y':
             info_p = {}
@@ -101,11 +76,11 @@ if config.status == "config":
                           module_info['children'][i]['version'] + default)
                 print("\t\t0 : not install" + default_0)
                 want_child = tools.input_re(
-                    '\r\tPlease select the option value , input [0-' + children_size + '] ( default "' + want_child + '" ): ',
-                    want_child, r'^([\s]*[0][\s]*)$|^(([\s]*[1-' + children_size + '])' + ((
-                                                                                                   '([\s]+[0-' + children_size + '][\s]*)*') if 'can_coexist' in info_p and
-                                                                                                                                                info_p[
-                                                                                                                                                    'can_coexist'] == 1 else '[\s]*') + ')?$',
+                    '\r\tPlease select the option value , input [0-' +
+                    children_size + '] ( default "' + want_child + '" ): ',
+                    want_child, r'^([\s]*[0][\s]*)$|^(([\s]*[1-' + children_size + '])' +
+                    (('([\s]+[0-' + children_size + '][\s]*)*')
+                     if 'can_coexist' in info_p and info_p['can_coexist'] == 1 else '[\s]*') + ')?$',
                     re.IGNORECASE, 1)
                 for want_id in want_child:
                     module_info['children'][children_list[int(want_id) - 1]]['will_install'] = 1
