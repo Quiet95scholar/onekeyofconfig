@@ -4,6 +4,8 @@ import os
 
 import bin.Drive
 import bin.Tools
+import re
+import bin.Tools as Tools
 
 
 class Config(object):
@@ -161,3 +163,79 @@ class Config(object):
                             self.supported[module]['children'][child]['will_install'] == 1:
                         return True
         return False
+
+    def rewrite_config(self):
+        tools = Tools.Tools()
+        if self.status == "config":
+            for module, module_info in self.supported.items():
+                want = 'n'
+                if 'children' in module_info:
+                    for child, child_info in module_info['children'].items():
+                        child_info['will_install'] = 0
+                        if 'default' in child_info:
+                            if child_info['default'] == 1:
+                                want = 'y'
+                else:
+                    module_info['will_install'] = 0
+                    if 'default' in module_info:
+                        if module_info['default'] == 1:
+                            want = 'y'
+                want = tools.input_re('\rWant to install ' +
+                                      module +
+                                      ' ? please input y/n ( default "' +
+                                      want +
+                                      '" ): ', want,
+                                      r'^[\s]*[YN]?[\s]*$', re.IGNORECASE)
+                if want == 'y':
+                    info_p = {}
+                    if 'info' in module_info:
+                        info_p = module_info['info']
+                    if 'default' in module_info:
+                        module_info['will_install'] = 1
+                    if 'children' in module_info:
+                        print("\tplease select " + module + " version :")
+                        children_list = list(module_info['children'].keys())
+                        children_size = str(len(children_list))
+                        default_0 = " ( * ) "
+                        want_child = "0"
+                        for i in children_list:
+                            default = ''
+                            if module_info['children'][i]['default'] == 1:
+                                default = " ( * ) "
+                                default_0 = ''
+                                if want_child == '0':
+                                    want_child = str(children_list.index(i) + 1)
+                                else:
+                                    want_child += " " + str(children_list.index(i) + 1)
+                            print("\t\t" + str(children_list.index(i) + 1) + " : " + module + " - " + i + " - " +
+                                  module_info['children'][i]['version'] + default)
+                        print("\t\t0 : not install" + default_0)
+                        want_child = tools.input_re(
+                            '\r\tPlease select the option value , input [0-' +
+                            children_size + '] ( default "' + want_child + '" ): ',
+                            want_child, r'^([\s]*[0][\s]*)$|^(([\s]*[1-' + children_size + '])' +
+                            (('([\s]+[0-' + children_size + '][\s]*)*')
+                             if 'can_coexist' in info_p and info_p['can_coexist'] == 1 else '[\s]*') + ')?$',
+                            re.IGNORECASE, 1)
+                        for want_id in want_child:
+                            module_info['children'][children_list[int(want_id) - 1]]['will_install'] = 1
+                else:
+                    if 'default' in module_info:
+                        module_info['will_install'] = 0
+                    if 'children' in module_info:
+                        for child, child_info in module_info['children'].items():
+                            child_info['will_install'] = 0
+        else:
+            for module, module_info in self.supported.items():
+                if 'children' in module_info:
+                    for child, child_info in module_info['children'].items():
+                        if 'default' in child_info:
+                            child_info['will_install'] = 0
+                            if child_info['default'] == 1:
+                                child_info['will_install'] = 1
+                else:
+                    if 'default' in module_info:
+                        module_info['will_install'] = 0
+                        if module_info['default'] == 1:
+                            module_info['will_install'] = 1
+        return self
