@@ -89,7 +89,6 @@ class Software(object):
         new_child = child.capitalize()
         if "module_class_name" in self.parameter['info']:
             new_module = self.parameter['info']['module_class_name']
-        print(new_module)
         try:
             class_name = getattr(bin.SoftwareChild, (new_module + new_child))
         except AttributeError:
@@ -215,14 +214,13 @@ class Software(object):
         return self
 
     def default_install(self):
-        new_class = self.init_software()
+        new_class = self
         if not self.installed():
-            new_class.install_rely().configure().install()
+            new_class.init_software().install_rely().configure().install()
         new_class.update_config().after_install().before_after_install()
         if self.installed():
             print('已安装' + self.module + self.child)
         else:
-            print(new_class.option)
             print('未成功安装' + self.module + self.child)
         return new_class
 
