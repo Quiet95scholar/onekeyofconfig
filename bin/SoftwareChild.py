@@ -97,7 +97,7 @@ class Openssl(bin.Software.Software):
         os.chdir(self.source_dir_path)
         os.system('./config' + self.option)
         os.chdir(old_work_space)
-        self.before_configure()
+        self.before_after_configure()
         self.after_configure()
         self.after_after_configure()
         return self
@@ -232,7 +232,8 @@ Include conf/vhost/*.conf'''
 RemoteIPHeader X-Forwarded-For
 RemoteIPInternalProxy 127.0.0.1''')
                     f.close()
-
+                shutil.copyfile(self.install_dir_path + os.sep + 'bin' + os.sep + 'apachectl',
+                                os.sep + 'etc' + os.sep + 'init.d' + os.sep + 'httpd')
         return self
 
     def rely_end(self, module, child, install_class):
@@ -254,7 +255,8 @@ RemoteIPInternalProxy 127.0.0.1''')
         return self
 
     def installed(self):
-        if os.path.isfile(self.install_dir_path + os.sep + "conf" + os.sep + "httpd.conf"):
+        if os.path.isfile(self.install_dir_path + os.sep + "conf" + os.sep + "httpd.conf") \
+                and os.path.isfile(os.sep + 'etc' + os.sep + 'init.d' + os.sep + 'httpd'):
             return True
         else:
             return False

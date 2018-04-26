@@ -45,13 +45,13 @@ class Config(object):
                 info_p = module_info['info']
             if 'children' not in module_info:
                 version = module_info['version']
-                info = info_p
+                info = copy.deepcopy(info_p)
                 if "will_install" in module_info and module_info['will_install'] == 1:
                     self.download(version, info)
             if 'children' in module_info:
                 for child, child_info in module_info['children'].items():
                     version = child_info['version']
-                    info = info_p
+                    info = copy.deepcopy(info_p)
                     if 'info' in child_info:
                         for info_k, info_v in child_info['info'].items():
                             info[info_k] = info_v
@@ -66,7 +66,7 @@ class Config(object):
             if 'info' in module_info:
                 info_p = module_info['info']
             if 'children' not in module_info:
-                info = info_p
+                info = copy.deepcopy(info_p)
                 if "will_install" in module_info and module_info['will_install'] == 1:
                     parameter = module_info
                     parameter['info'] = info
@@ -74,7 +74,7 @@ class Config(object):
                                           self).child_class.default_install()
             if 'children' in module_info:
                 for child, child_info in module_info['children'].items():
-                    info = info_p
+                    info = copy.deepcopy(info_p)
                     if 'info' in child_info:
                         for info_k, info_v in child_info['info'].items():
                             info[info_k] = info_v
