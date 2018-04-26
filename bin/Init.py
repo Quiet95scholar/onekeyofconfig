@@ -5,7 +5,7 @@ from subprocess import Popen
 class Init(object):
 
     def __init__(self):
-        popen_link: Popen = Popen(["which", "pip3"], stdout=PIPE)
+        popen_link = Popen(["which", "pip3"], stdout=PIPE)
         popen_link.wait()
         if popen_link.returncode > 0:
             raise Exception('本系统不存在pip3')
